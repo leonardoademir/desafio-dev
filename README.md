@@ -52,7 +52,7 @@ Caso esteja familizariado com Docker, na raiz do projeto digite:</br>
 *docker build -t python-app</br>
 docker run python-app OU docker-compose up*
 
-Configurando o banco:</br>
+### :department_store: Configurando o banco:</br>
 DB - MySQL</br>
 No terminal digite:</br>
 *CREATE DATABASE cnab_bycoders CHARACTER SET utf8 COLLATE utf8_general_ci;*</br>
