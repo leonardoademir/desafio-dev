@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Select from "react-select";
 import { FaStoreAlt, FaUpload, FaSpinner } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
+import { Context } from "../../store/appContext";
 import api from '../../services/api';
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
@@ -11,37 +12,61 @@ import Container from '../../components/Container';
 const Main = (props) => {
   const history = useHistory();
 
-  const [stores, setStores] = useState([])
-  const [store, setStore] = useState([])
-  const [transactions, setTransactions] = useState([])
-  const [sum, setSum] = useState(0)
+  const { store, actions } = useContext(Context);
+  const [shops, setShops] = useState([]);
+  const [shop, setShop] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+  const [sum, setSum] = useState(0);
 
   useEffect(() => {
     (async () => {
       const resp = await api.get("/stores")
 
-      setStores(resp.data.response.map(e => ({ "label": e.name, "value": e.id })))
+      setShops(resp.data.response.map(e => ({ "label": e.name, "value": e.id })))
     })();
   }, []);
 
   const changeTransactions = async(e) => {
-    setStore(e)
+    setShop(e)
     const resp = await api.get(`/transactions/store/${e.value}`)
     setTransactions(resp.data.response)
     setSum(resp.data.value_sum)
   }
 
     return (
+      <>
       <Container>
         <h1>
           <FaStoreAlt />
           Stores
         </h1>
+        <br/>
+        {(!store.token) ? 
+        ( <>
+          <h3>You are not logged in. Please log in now.</h3>
+          <Button style={{ marginTop:'30px', textAlign:'center', justifyContent: 'center'}}
+              onClick={async () => {
+                  history.push('/login')
+              }}
+              variant="primary"
+              size="lg"
+              round="true"
+              icon="true"
+              className='btn-round-acoes mr-3'
+              title="Upload"
+              > 
+              Log in
+          </Button>
+        </>
+        )
+        :
+        (
+          <>
         <Select style={{marginTop:'30px'}}
-        value={store}
+        value={shop}
         closeMenuOnSelect={true}
-        options={stores}
-        placeholder="Select the Store"
+        options={shops}
+        placeholder="Select the shop"
         onChange={e => changeTransactions(e)} />
 
         <Table responsive style={{marginTop:'30px'}}>
@@ -56,7 +81,7 @@ const Main = (props) => {
         </thead>
         <tbody>
           {transactions.length > 0 ? (transactions.map(t =>(
-            <tr>
+            <tr key={t.id}>
               <td>{t.transaction_type}</td>
               <td>{t.cpf}</td>
               <td>{t.card}</td>
@@ -68,7 +93,7 @@ const Main = (props) => {
         </tbody>
         </Table>
         <h4 style={{ float: 'right'}}>TOTAL: R${sum.toFixed(2)}</h4>
-        <Button style={{ marginTop:'30px', textAlign:'center', justifyContent: 'center'}}
+        <Button style={{ marginTop:'30px', marginLeft:'20px', textAlign:'center', justifyContent: 'center'}}
             onClick={async () => {
                 history.push('/upload')
             }}
@@ -78,12 +103,26 @@ const Main = (props) => {
             icon="true"
             className='btn-round-acoes mr-3'
             title="Upload"
-
             > 
             <FaUpload/>
               Upload CNAB files
         </Button>
+        <Button style={{ marginTop:'30px', float:'left', justifyContent: 'right'}}
+            onClick={() => actions.logout()}
+            variant="danger"
+            size="lg"
+            round="true"
+            icon="true"
+            className='btn-round-acoes mr-3'
+            title="Logout"
+            > 
+              Log out
+        </Button>
+        </>
+        )}
       </Container>
+      
+      </>
     );
   
 }
