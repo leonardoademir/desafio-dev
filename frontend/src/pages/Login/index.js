@@ -1,11 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Context } from "../../store/appContext";
-import Select from "react-select";
 import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 import { InputGroup, FormControl } from 'react-bootstrap';
-import Table from 'react-bootstrap/Table';
-
 import Container from '../../components/Container';
 
 const Login = (props) => {
