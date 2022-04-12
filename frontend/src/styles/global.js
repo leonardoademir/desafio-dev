@@ -27,6 +27,10 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
+  h3 {
+    text-align: center;
+  }
+
   button:hover {
     font-size: 150%;
     transition: 0.4s;

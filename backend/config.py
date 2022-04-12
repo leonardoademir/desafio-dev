@@ -21,6 +21,7 @@ class Development(Config):
 
     SESSION_COOKIE_NAME = 'google-login-session'
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=5)
+    JWT_SECRET_KEY = 'jdk43frekf3kdkdl2oi3rfdsmlalkeklwqe24@432kl43kl'
 
 
     # Connect to the database

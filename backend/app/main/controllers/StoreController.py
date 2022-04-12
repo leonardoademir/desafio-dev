@@ -1,9 +1,7 @@
 
 from ..models.Store import Store
 from app import db
-from flask_sqlalchemy import SQLAlchemy
 from ..utils import serialize
-from app.auth_decorator import login_required
 
 class StoreController():
     #@login_required

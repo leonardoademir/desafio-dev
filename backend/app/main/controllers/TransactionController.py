@@ -4,7 +4,6 @@ from ..models.Store import Store
 from ..models.TransactionType import TransactionType
 
 from app import db
-from flask_sqlalchemy import SQLAlchemy
 from ..utils import serialize
 from datetime import datetime
 from flask import request
