@@ -47,6 +47,6 @@ py src/manage.py test app</br>*
 
 
 ### 👽 Acessando on-line </br>
-A aplicação tamém está rodando on-line através da plataforma Heroku.
-####back-end: https://dj-prices-backend.herokuapp.com/
+A aplicação tamém está rodando on-line através da plataforma Heroku.</br>
+####back-end: https://dj-prices-backend.herokuapp.com/ </br>
 ####front-end: https://dj-prices-frontend.herokuapp.com/
