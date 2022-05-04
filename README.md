@@ -45,3 +45,8 @@ Para testar a aplicação é necessário abrir o terminal, ir para tests e execu
 *cd backend</br>
 py src/manage.py test app</br>*
 
+
+### 👽 Acessando on-line </br>
+A aplicação tamém está rodando on-line através da plataforma Heroku.
+####back-end: https://dj-prices-backend.herokuapp.com/
+####front-end: https://dj-prices-frontend.herokuapp.com/
